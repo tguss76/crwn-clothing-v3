@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { renderToStaticMarkup } from 'react-dom/server';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('renders category cards', () => {
+  const markup = renderToStaticMarkup(<App />);
+
+  expect(markup).toMatch(/hats/i);
+  expect(markup.match(/shop now/gi)).toHaveLength(5);
 });
